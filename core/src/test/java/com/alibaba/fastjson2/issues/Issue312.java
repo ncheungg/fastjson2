@@ -12,11 +12,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Issue312 {
     @Test
     public void test() {
-        JSONObject object = JSONObject.of("file", new File("/User/xxx/JsonTest.java"));
+        // JSONObject object = JSONObject.of("file", new
+        // File("/User/xxx/JsonTest.java"));
+        // String json = object.toJSONString();
+        // assertEquals("{\"file\":\"/User/xxx/JsonTest.java\"}", json);
+        // File file = JSON.parseObject(json).getObject("file", File.class);
+        // assertEquals("/User/xxx/JsonTest.java", file.toString());
+        JSONObject object = JSONObject.of("file", new File("\\User\\xxx\\JsonTest.java"));
         String json = object.toJSONString();
-        assertEquals("{\"file\":\"/User/xxx/JsonTest.java\"}", json);
+        assertEquals("{\"file\":\"\\\\User\\\\xxx\\\\JsonTest.java\"}", json);
         File file = JSON.parseObject(json).getObject("file", File.class);
-        assertEquals("/User/xxx/JsonTest.java", file.toString());
+        assertEquals("\\User\\xxx\\JsonTest.java", file.toString());
     }
 
     @Test

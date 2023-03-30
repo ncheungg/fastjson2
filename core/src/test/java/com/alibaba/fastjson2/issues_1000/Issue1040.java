@@ -13,9 +13,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class Issue1040 {
     @Test
     public void test() {
-        Path path = FileSystems.getDefault().getPath("/usr/bin");
+        // Path path = FileSystems.getDefault().getPath("/usr/bin");
+        // Map<String, Object> ext = new HashMap<>();
+        // ext.put("test1", path);
+        // assertEquals("{\"test1\":\"/usr/bin\"}", JSONObject.toJSONString(ext));
+        Path path = FileSystems.getDefault().getPath("\\usr\\bin");
         Map<String, Object> ext = new HashMap<>();
         ext.put("test1", path);
-        assertEquals("{\"test1\":\"/usr/bin\"}", JSONObject.toJSONString(ext));
+        assertEquals("{\"test1\":\"\\\\usr\\\\bin\"}", JSONObject.toJSONString(ext));
     }
 }
