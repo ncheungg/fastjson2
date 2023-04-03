@@ -80,4 +80,45 @@ public class CSVWriterTest {
         writer = CSVWriter.of(out, StandardCharsets.UTF_16LE);
         assertInstanceOf(CSVWriterUTF16.class, writer);
     }
+
+    @Test
+    public void testWriteRowObject() {
+        CSVWriter rowObjectWriter = CSVWriter.of();
+
+        // Test case for null object
+        Object nullObj = null;
+        rowObjectWriter.writeRowObject(nullObj);
+        assertEquals("writeRow() should be called when object is null", "\n", rowObjectWriter.toString());
+
+        // Test case for object with single field
+        SingleFieldObject singleFieldObj = new SingleFieldObject("test");
+        rowObjectWriter.writeRowObject(singleFieldObj);
+        assertEquals("writeRowObject() should write the value of the single field", "\ntest\n",
+                rowObjectWriter.toString());
+
+        // Test case for object with multiple fields
+        MultiFieldObject multiFieldObj = new MultiFieldObject(1, "test");
+        rowObjectWriter.writeRowObject(multiFieldObj);
+        assertEquals("writeRowObject() should write the values of all fields", "\ntest\n1,test\n",
+                rowObjectWriter.toString());
+    }
+
+    // Test classes for the test cases
+    private static class SingleFieldObject {
+        public String field;
+
+        public SingleFieldObject(String field) {
+            this.field = field;
+        }
+    }
+
+    private static class MultiFieldObject {
+        public int intField;
+        public String stringField;
+
+        public MultiFieldObject(int intField, String stringField) {
+            this.intField = intField;
+            this.stringField = stringField;
+        }
+    }
 }

@@ -8,12 +8,12 @@ import static org.junit.Assert.assertFalse;
 
 public class CSVParserUTF16Test {
 
-    private CSVParserUTF16 parser;
+    private CSVParserUTF8 parser;
 
     @BeforeEach
     public void initEach() {
         CSVParser csvParser = CSVParser.of("");
-        parser = (CSVParserUTF16) csvParser;
+        parser = (CSVParserUTF8) csvParser;
     }
 
     @AfterEach
