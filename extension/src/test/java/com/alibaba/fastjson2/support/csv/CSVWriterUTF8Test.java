@@ -105,7 +105,7 @@ public class CSVWriterUTF8Test {
             writer.writeRaw(a);
         });
 
-        char b = (char) 9000;
+        char b = (char) 128;
         assertThrows(JSONException.class, () -> {
             writer.writeRaw(b);
         });
@@ -141,6 +141,24 @@ public class CSVWriterUTF8Test {
 
         String csv = writer.toString();
         assertEquals("3.14159", csv);
+    }
+
+    @Test
+    public void testWriteFloat2() {
+        float f = Float.MAX_VALUE;
+        writer.writeFloat(f);
+
+        String csv = writer.toString();
+        assertEquals("3.4028235E38", csv);
+    }
+
+    @Test
+    public void testWriteFloat3() {
+        float f = -Float.MAX_VALUE;
+        writer.writeFloat(f);
+
+        String csv = writer.toString();
+        assertEquals("-3.4028235E38", csv);
     }
 
     @Test
